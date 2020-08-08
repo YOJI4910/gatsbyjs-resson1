@@ -14,6 +14,7 @@ export default ({ data }) => (
               height="46.59"
             >
               <defs></defs>
+              {/* desc: imgでいうalt */}
               <desc>ESSENTIALS</desc>
               <path
                 fill="#477294"
@@ -167,6 +168,13 @@ export default ({ data }) => (
           </li>
         </ul>
       </div>
+      <div className="back">
+        <Img
+          fluid={data.pattern.childImageSharp.fluid}
+          alt=""
+          style={{ height: "100%" }}
+        />
+      </div>
     </footer>
   </>
 )
@@ -209,6 +217,14 @@ export const query = graphql`
       relativePath
       childImageSharp {
         fluid(maxWidth: 1600) {
+          ...GatsbyImageSharpFluid_withWebp_tracedSVG
+        }
+      }
+    }
+    pattern: file(relativePath: { eq: "pattern.jpg" }) {
+      relativePath
+      childImageSharp {
+        fluid(maxWidth: 1920, quality: 90) {
           ...GatsbyImageSharpFluid_withWebp_tracedSVG
         }
       }
