@@ -1,6 +1,8 @@
 import React from "react"
+import { graphql } from "gatsby"
+import Img from "gatsby-image"
 
-export default () => (
+export default ({ data }) => (
   <>
     <header className="header">
       <div className="container">
@@ -25,7 +27,11 @@ export default () => (
 
     <section className="hero">
       <figure>
-        <img src="/images/hero.jpg" alt="" />
+        <Img
+          fluid={data.hero.childImageSharp.fluid}
+          alt=""
+          style={{ height: "100%" }}
+        />
       </figure>
       <div className="catch">
         <h1>
@@ -48,7 +54,7 @@ export default () => (
         <div className="details">
           <div className="detail">
             <figure>
-              <img src="/images/fruit.jpg" alt="" />
+              <Img fluid={data.fruit.childImageSharp.fluid} alt="" />
             </figure>
             <h3>フルーツ</h3>
             <p>FRUIT</p>
@@ -61,7 +67,7 @@ export default () => (
 
           <div className="detail">
             <figure>
-              <img src="/images/grain.jpg" alt="" />
+              <Img fluid={data.grain.childImageSharp.fluid} alt="" />
             </figure>
             <h3>穀物</h3>
             <p>GRAIN</p>
@@ -74,7 +80,7 @@ export default () => (
 
           <div className="detail">
             <figure>
-              <img src="/images/beverage.jpg" alt="" />
+              <Img fluid={data.beverage.childImageSharp.fluid} alt="" />
             </figure>
             <h3>飲み物</h3>
             <p>BEVERAGE</p>
@@ -91,7 +97,11 @@ export default () => (
     <section className="photo">
       <h2 className="sr-only">Photo</h2>
       <figure>
-        <img src="/images/berry.jpg" alt="赤く熟したベリー" />
+        <Img
+          fluid={data.berry.childImageSharp.fluid}
+          alt=""
+          style={{ height: "100%" }}
+        />
       </figure>
     </section>
 
@@ -128,3 +138,48 @@ export default () => (
     </footer>
   </>
 )
+
+export const query = graphql`
+  query {
+    hero: file(relativePath: { eq: "hero.jpg" }) {
+      relativePath
+      childImageSharp {
+        fluid(maxWidth: 1600) {
+          ...GatsbyImageSharpFluid_withWebp_tracedSVG
+        }
+      }
+    }
+    fruit: file(relativePath: { eq: "fruit.jpg" }) {
+      relativePath
+      childImageSharp {
+        fluid(maxWidth: 320) {
+          ...GatsbyImageSharpFluid_withWebp_tracedSVG
+        }
+      }
+    }
+    grain: file(relativePath: { eq: "grain.jpg" }) {
+      relativePath
+      childImageSharp {
+        fluid(maxWidth: 320) {
+          ...GatsbyImageSharpFluid_withWebp_tracedSVG
+        }
+      }
+    }
+    beverage: file(relativePath: { eq: "beverage.jpg" }) {
+      relativePath
+      childImageSharp {
+        fluid(maxWidth: 320) {
+          ...GatsbyImageSharpFluid_withWebp_tracedSVG
+        }
+      }
+    }
+    berry: file(relativePath: { eq: "berry.jpg" }) {
+      relativePath
+      childImageSharp {
+        fluid(maxWidth: 1600) {
+          ...GatsbyImageSharpFluid_withWebp_tracedSVG
+        }
+      }
+    }
+  }
+`
